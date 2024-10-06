@@ -44,7 +44,7 @@ export default defineConfig({
   },
   output: {
     uniqueName: "product_mf",
-    publicPath: "http://localhost:3001/",
+    publicPath: "auto",
   },
   watchOptions: {
     ignored: ["**/node_modules/**", "**/@mf-types/**"],
