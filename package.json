@@ -1,0 +1,25 @@
+{
+  "name": "@oytuncoban/microftonrend-poc",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "PoC concept for MF Case Study",
+  "main": "index.js",
+  "keywords": [],
+  "author": "oytuncoban",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "1.9.3",
+    "@module-federation/enhanced": "^0.6.7",
+    "@module-federation/typescript": "^3.1.3"
+  },
+  "scripts": {
+    "dev:shell": "pnpm --filter shell dev",
+    "dev:product": "pnpm --filter product-mf dev",
+    "prod:shell": "pnpm --filter shell build",
+    "prod:product": "pnpm --filter product-mf build",
+    "lint:shell": "pnpm --filter shell lint",
+    "lint:product": "pnpm --filter product-mf lint",
+    "format:shell": "pnpm --filter shell format",
+    "format:product": "pnpm --filter product-mf format"
+  }
+}

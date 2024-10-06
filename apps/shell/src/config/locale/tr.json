@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "title": "Shell Uygulaması",
+    "language": "Dil",
+    "link": {
+      "home": "Anasayfa",
+      "products": "Ürünler"
+    }
+  }
+}

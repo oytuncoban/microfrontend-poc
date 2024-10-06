@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "title": "Shell App",
+    "language": "Language",
+    "link": {
+      "home": "Home",
+      "products": "Products"
+    }
+  }
+}

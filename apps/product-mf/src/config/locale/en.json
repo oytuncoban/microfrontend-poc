@@ -1,0 +1,9 @@
+{
+  "button": {
+    "addToCart": "Add to cart",
+    "buyNow": "Buy now"
+  },
+  "item": {
+    "placeholder": "Product"
+  }
+}

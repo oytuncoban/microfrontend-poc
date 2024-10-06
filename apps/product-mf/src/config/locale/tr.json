@@ -1,0 +1,9 @@
+{
+  "button": {
+    "addToCart": "Sepete ekle",
+    "buyNow": "Şimdi satın al"
+  },
+  "item": {
+    "placeholder": "Ürün"
+  }
+}
