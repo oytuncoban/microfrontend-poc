@@ -49,10 +49,16 @@ export default defineConfig({
     },
   },
   output: {
+    sourcemap: true,
     uniqueName: "shell",
-    publicPath: "/",
-    filename: "[name].[contenthash].js",
-    chunkFilename: "[name].[contenthash].js",
+    publicPath: "auto",
+    // publicPath: isDev ? "/" : "http://localhost:80",
+    // ...(isDev
+    //   ? {
+    //       filename: "[name].[contenthash].js",
+    //       chunkFilename: "[name].[contenthash].js",
+    //     }
+    //   : {}),
   },
   watchOptions: {
     ignored: ["**/node_modules/**", "**/@mf-types/**"],
@@ -137,7 +143,6 @@ export default defineConfig({
 
     new ModuleFederationPlugin({
       name: "shell",
-      filename: "remoteEntry.js",
       remotes: REMOTES,
       shared: {
         ...deps,
@@ -148,6 +153,7 @@ export default defineConfig({
           requiredVersion: deps["react-dom"],
         },
         "react-router-dom": {
+          eager: true,
           singleton: true,
           requiredVersion: deps["react-router-dom"],
         },
@@ -158,6 +164,8 @@ export default defineConfig({
       ],
     }),
   ].filter(Boolean),
+  devtool: !isDev ? "source-map" : "eval-cheap-module-source-map",
+
   optimization: {
     minimizer: [
       new rspack.SwcJsMinimizerRspackPlugin(),
@@ -165,6 +173,18 @@ export default defineConfig({
         minimizerOptions: { targets },
       }),
     ],
+
+    // minimize: !isDev,
+    // minimizer: !isDev
+    //   ? [
+    //       new rspack.SwcJsMinimizerRspackPlugin({
+    //         sourceMap: true,
+    //       }),
+    //       new rspack.LightningCssMinimizerRspackPlugin({
+    //         sourceMap: true,
+    //       }),
+    //     ]
+    //   : [],
   },
   experiments: {
     css: true,
