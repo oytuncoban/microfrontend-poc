@@ -2,18 +2,9 @@ import { ModuleFederationPlugin } from "@module-federation/enhanced/rspack";
 import { defineConfig } from "@rspack/cli";
 import { rspack } from "@rspack/core";
 import RefreshPlugin from "@rspack/plugin-react-refresh";
-import { createRequire } from "node:module";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
-import sass from "sass-embedded";
-
-// CommonJS require
-const require = createRequire(import.meta.url);
-const deps = require("./package.json").dependencies;
-
-// CommonJS modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import * as sass from "sass-embedded";
+import path from "path";
+import { dependencies as deps } from "./package.json";
 
 // Env variables
 const isDev = process.env.NODE_ENV === "development";
@@ -29,7 +20,6 @@ export const REMOTES = {
 
 export default defineConfig({
   context: __dirname,
-  port: PORT,
   entry: {
     main: "./src/main.tsx",
   },
@@ -49,16 +39,8 @@ export default defineConfig({
     },
   },
   output: {
-    sourcemap: true,
     uniqueName: "shell",
     publicPath: "auto",
-    // publicPath: isDev ? "/" : "http://localhost:80",
-    // ...(isDev
-    //   ? {
-    //       filename: "[name].[contenthash].js",
-    //       chunkFilename: "[name].[contenthash].js",
-    //     }
-    //   : {}),
   },
   watchOptions: {
     ignored: ["**/node_modules/**", "**/@mf-types/**"],
@@ -70,35 +52,34 @@ export default defineConfig({
       },
     },
     rules: [
+      // {
+      //   test: /\.(css|sass|scss)$/,
+      //   use: [
+      //     {
+      //       loader: "postcss-loader",
+      //       options: {
+      //         postcssOptions: {
+      //           plugins: { "postcss-preset-mantine": {} },
+      //         },
+      //       },
+      //     },
+      //   ],
+      //   type: "css/auto",
+      // },
       {
         test: /\.(sass|scss)$/,
         use: [
           {
             loader: "sass-loader",
             options: {
-              sourceMap: true,
               api: "modern-compiler",
               implementation: sass,
-              additionalData: `@import "${resolve(
+              additionalData: `@import "${path.resolve(
                 __dirname,
                 "src/styles/_mantine.scss"
               )}";`,
               sassOptions: {
-                includePaths: [resolve(__dirname, "src")],
-              },
-            },
-          },
-        ],
-        type: "css/auto",
-      },
-      {
-        test: /\.(css|sass|scss)$/,
-        use: [
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: { "postcss-preset-mantine": {} },
+                includePaths: [path.resolve(__dirname, "src")],
               },
             },
           },
@@ -143,9 +124,24 @@ export default defineConfig({
 
     new ModuleFederationPlugin({
       name: "shell",
-      remotes: REMOTES,
+      // remotes: REMOTES,
       shared: {
         ...deps,
+        i18next: {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps.i18next,
+        },
+        "react-i18next": {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps.i18next,
+        },
+        "i18next-browser-languagedetector": {
+          eager: true,
+          singleton: true,
+          requiredVersion: deps.i18next,
+        },
         react: { eager: true, singleton: true, requiredVersion: deps.react },
         "react-dom": {
           eager: true,
@@ -159,32 +155,24 @@ export default defineConfig({
         },
       },
       runtimePlugins: [
-        resolve(__dirname, "../../shared-strategy.ts"),
-        resolve(__dirname, "../../offline-remote.ts"),
+        // path.resolve(__dirname, "../../shared-strategy.ts"),
+        path.resolve(__dirname, "../../offline-remote.ts"),
       ],
     }),
   ].filter(Boolean),
+
   devtool: !isDev ? "source-map" : "eval-cheap-module-source-map",
 
   optimization: {
-    minimizer: [
-      new rspack.SwcJsMinimizerRspackPlugin(),
-      new rspack.LightningCssMinimizerRspackPlugin({
-        minimizerOptions: { targets },
-      }),
-    ],
-
-    // minimize: !isDev,
-    // minimizer: !isDev
-    //   ? [
-    //       new rspack.SwcJsMinimizerRspackPlugin({
-    //         sourceMap: true,
-    //       }),
-    //       new rspack.LightningCssMinimizerRspackPlugin({
-    //         sourceMap: true,
-    //       }),
-    //     ]
-    //   : [],
+    minimize: !isDev,
+    minimizer: !isDev
+      ? [
+          new rspack.SwcJsMinimizerRspackPlugin({}),
+          new rspack.LightningCssMinimizerRspackPlugin({
+            minimizerOptions: { targets },
+          }),
+        ]
+      : [],
   },
   experiments: {
     css: true,
@@ -192,8 +180,8 @@ export default defineConfig({
 });
 
 function getRemoteEntryUrl(
-  remoteName,
-  envKey,
+  remoteName: string,
+  envKey: string,
   fallback = "localhost",
   fallbackPort = 3001
 ) {
