@@ -109,7 +109,6 @@ export default defineConfig({
   plugins: [
     new rspack.HtmlRspackPlugin({
       template: "./index.html",
-      publicPath: "./src/public",
     }),
 
     isDev ? new RefreshPlugin() : null,
