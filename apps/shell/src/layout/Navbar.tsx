@@ -37,6 +37,7 @@ export const Navbar: React.FC = () => {
 			data-active={pathname.includes(item.link) || undefined}
 			to={item.link}
 			key={item.link}
+			
 		>
 			<item.icon className={classes.linkIcon} stroke={1.5} />
 			<span>{item.label}</span>

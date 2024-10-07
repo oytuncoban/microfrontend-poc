@@ -1,3 +1,5 @@
+import "../styles/remote.css";
+
 import useCartStore from "@/store/useCartStore";
 import type React from "react";
 import { Link } from "react-router-dom";

@@ -1,14 +1,22 @@
 import { AppShell, Box, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import type { PropsWithChildren } from "react";
+import { useEffect, type PropsWithChildren } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Navbar from "./Navbar";
 import styles from "./layout.module.scss";
+import { useLocation } from "react-router-dom";
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
-	const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
+	const [mobileOpened, {close,  toggle: toggleMobile }] = useDisclosure();
 	const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+
+	const location = useLocation();
+
+	useEffect(() => {
+		close();
+	}, [location.pathname]);
+
 
 	return (
 		<AppShell

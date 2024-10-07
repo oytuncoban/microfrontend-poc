@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production rspack build",
     "lint": "biome lint --write ./src",
     "format": "biome format --write ./src",
-    "serve": "serve -l 80 dist"
+    "serve": "serve -s -l 80 dist"
   },
   "dependencies": {
     "@mantine/core": "^7.13.1",

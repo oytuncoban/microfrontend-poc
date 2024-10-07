@@ -50,7 +50,9 @@ export default defineConfig({
   },
   output: {
     uniqueName: "shell",
-    publicPath: "auto",
+    publicPath: "/",
+    chunkFilename: "[name].[contenthash].js",
+    filename: "[name].[contenthash].js",
   },
   watchOptions: {
     ignored: ["**/node_modules/**", "**/@mf-types/**"],
@@ -162,6 +164,7 @@ export default defineConfig({
           requiredVersion: deps["react-dom"],
         },
         "react-router-dom": {
+          eager: true,
           singleton: true,
           requiredVersion: deps["react-router-dom"],
         },
@@ -175,9 +178,9 @@ export default defineConfig({
   optimization: {
     minimizer: [
       new rspack.SwcJsMinimizerRspackPlugin(),
-      new rspack.LightningCssMinimizerRspackPlugin({
-        minimizerOptions: { targets },
-      }),
+      // new rspack.LightningCssMinimizerRspackPlugin({
+      //   minimizerOptions: { targets },
+      // }),
     ],
   },
   experiments: {

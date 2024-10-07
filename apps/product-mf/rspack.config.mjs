@@ -45,6 +45,8 @@ export default defineConfig({
   output: {
     uniqueName: "product_mf",
     publicPath: "auto",
+    chunkFilename: "[name].[contenthash].js",
+    filename: "[name].[contenthash].js",
   },
   watchOptions: {
     ignored: ["**/node_modules/**", "**/@mf-types/**", "**/shared/**"],
@@ -57,9 +59,9 @@ export default defineConfig({
     },
 
     rules: [
-       {
+      {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
+        type: "asset/resource",
       },
       {
         test: /\.css$/,

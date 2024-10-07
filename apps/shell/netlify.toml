@@ -4,6 +4,10 @@
 [dev]
   command = "pnpm dev"
 
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[headers]]
   for = "/*"
