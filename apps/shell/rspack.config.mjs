@@ -50,9 +50,7 @@ export default defineConfig({
   },
   output: {
     uniqueName: "shell",
-    publicPath: "/",
-    filename: "[name].[contenthash].js",
-    chunkFilename: "[name].[contenthash].js",
+    publicPath: "auto",
   },
   watchOptions: {
     ignored: ["**/node_modules/**", "**/@mf-types/**"],
@@ -134,6 +132,18 @@ export default defineConfig({
     ],
   },
   plugins: [
+    new rspack.CopyRspackPlugin({
+      patterns: [
+        {
+          from: "public",
+          to: "",
+        },
+        {
+          from: "src/assets",
+          to: "public/assets",
+        },
+      ],
+    }),
     new rspack.HtmlRspackPlugin({
       template: "./index.html",
     }),

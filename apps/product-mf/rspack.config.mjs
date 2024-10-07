@@ -111,6 +111,18 @@ export default defineConfig({
     ],
   },
   plugins: [
+    new rspack.CopyRspackPlugin({
+      patterns: [
+        {
+          from: "public",
+          to: "",
+        },
+        {
+          from: "src/assets",
+          to: "public/assets",
+        },
+      ],
+    }),
     new rspack.HtmlRspackPlugin({
       template: "./index.html",
     }),
