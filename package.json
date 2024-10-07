@@ -1,8 +1,8 @@
 {
-  "name": "@oytuncoban/microftonrend-poc",
+  "name": "@oytuncoban/microfrontend-poc",
   "type": "module",
   "version": "1.0.0",
-  "description": "PoC concept for MF Case Study",
+  "description": "PoC concept for Microfrontend Case Study",
   "main": "index.js",
   "keywords": [],
   "author": "oytuncoban",
