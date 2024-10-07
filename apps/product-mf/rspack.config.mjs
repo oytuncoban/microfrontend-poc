@@ -47,7 +47,7 @@ export default defineConfig({
     publicPath: "auto",
   },
   watchOptions: {
-    ignored: ["**/node_modules/**", "**/@mf-types/**"],
+    ignored: ["**/node_modules/**", "**/@mf-types/**", "**/shared/**"],
   },
   module: {
     parser: {

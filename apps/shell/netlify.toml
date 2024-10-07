@@ -1,0 +1,11 @@
+[build]
+  command = "pnpm install ; pnpm build"
+  
+[dev]
+  command = "pnpm dev"
+
+
+[[headers]]
+  for = "/*" # you can configure the correct paths here
+  [headers.values]
+    access-control-allow-origin = "*" 
