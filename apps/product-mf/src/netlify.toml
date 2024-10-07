@@ -4,8 +4,7 @@
 [dev]
   command = "pnpm dev"
 
-
 [[headers]]
-  for = "/*" # you can configure the correct paths here
-  [headers.values]
-    access-control-allow-origin = "*" 
+  for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
