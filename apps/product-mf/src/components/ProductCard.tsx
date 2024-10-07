@@ -1,12 +1,11 @@
 import { cn } from "@/lib/utils";
 import useCartStore from "@/store/useCartStore";
+import useItemDetails from "@/store/useItemDetails";
 import { ImageIcon } from "@radix-ui/react-icons";
 import type React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/Button";
-import { ItemWithQuantity } from "../../dist/.dev-server/compiled-types/store/useCartStore";
-import useItemDetails from "@/store/useItemDetails";
 
 export type Item = {
 	id: string;
@@ -29,13 +28,14 @@ export const ProductCard: React.FC<{
 	item: Item;
 	variant?: "featured" | "default";
 }> = ({ item, variant = "default" }) => {
+	const { t } = useTranslation("product");
 	return (
 		<div className="p-1 border border-gray-100 rounded-md">
 			<div className="flex flex-col items-start gap-4 justify-between p-2">
 				<MockImage item={item} />
 
 				<Link to={`${item.id}`}>
-					<span className="text-xs md:text-sm lg:text-md">{item.name}</span>
+					<span className="text-xs md:text-sm lg:text-md">{t("item.placeholder")} {item.name}</span>
 				</Link>
 
 				<div
