@@ -124,7 +124,7 @@ export default defineConfig({
 
     new ModuleFederationPlugin({
       name: "shell",
-      // remotes: REMOTES,
+      remotes: REMOTES,
       shared: {
         ...deps,
         i18next: {
