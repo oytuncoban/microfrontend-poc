@@ -57,6 +57,10 @@ export default defineConfig({
     },
 
     rules: [
+       {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
       {
         test: /\.css$/,
         use: ["postcss-loader"],
