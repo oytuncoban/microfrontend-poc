@@ -155,7 +155,7 @@ export default defineConfig({
         },
       },
       runtimePlugins: [
-        // path.resolve(__dirname, "../../shared-strategy.ts"),
+        path.resolve(__dirname, "../../shared-strategy.ts"),
         path.resolve(__dirname, "../../offline-remote.ts"),
       ],
     }),
