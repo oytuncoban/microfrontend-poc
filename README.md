@@ -29,18 +29,6 @@ This project is a Proof of Concept (PoC) for a Micro Frontend architecture using
 
 4. Open your browser and navigate to `http://localhost:3000` for the shell application
 
-## Architectural Design
-
-This project uses a monorepo structure with the following main components:
-
-- Shell application (host)
-- Product micro frontend (remote)
-- Shared package for common utilities and components
-
-The applications are built using Rspack and utilize Module Federation for runtime integration.
-
-## Common Issues with MFE and Approaches
-
 ### Routing
 
 Routing in a Micro Frontend architecture can be challenging, as each micro frontend needs to manage its own routes while also integrating seamlessly with the shell application. Our approach uses a combination of shell-level routing and micro frontend-specific routing to achieve a flexible and maintainable solution.
@@ -123,7 +111,3 @@ The Product MFE (Micro Frontend) implements its own localization solution using 
     return <I18nextProvider i18n={i18n}>{<ProductRoutes />}</I18nextProvider>;
    }
    ```
-
-## Discussion
-
-## Conclusion

@@ -1,4 +1,5 @@
 import "../styles/remote.css";
+import classes from "./Cart.module.scss";
 
 import useCartStore from "@/store/useCartStore";
 import type React from "react";
@@ -9,8 +10,10 @@ export const CartButton: React.FC = () => {
 	const cartCount = useCartStore((state) => state.cartCount);
 
 	return (
-		<Link to="/home">
-			<CartButtonWithCount cartCount={cartCount} />
+		<Link to="home">
+			<div className={classes.iconWrapper}>
+				<CartButtonWithCount cartCount={cartCount} />
+			</div>
 		</Link>
 	);
 };

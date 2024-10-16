@@ -5,13 +5,14 @@ import resources from "./config/resources";
 import { ProductRoutes } from "./routes";
 import "./styles/remote.css";
 
-function App() {
-	const { i18n } = useTranslation();
-	if (i18n) {
-		addResources(resources, "product", i18n);
+function App({ i18n }: { i18n?: i18n }) {
+	const { i18n: _i18n } = useTranslation();
+	const __i18n = i18n || _i18n;
+	if (__i18n?.store) {
+		addResources(resources, "product", __i18n);
 	}
 
-	return <I18nextProvider i18n={i18n}>{<ProductRoutes />}</I18nextProvider>;
+	return <I18nextProvider i18n={__i18n}>{<ProductRoutes />}</I18nextProvider>;
 }
 
 export default App;

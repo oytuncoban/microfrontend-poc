@@ -1,17 +1,13 @@
 import ProductCarousel from "@/components/ProductCarousel";
 import ProductGrid from "@/components/ProductGrid";
-import {generateProducts} from "@/lib";	
 import { useProductStore } from "@/store/useCartStore";
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import type React from "react";
 
 export const ProductList: React.FC = () => {
-	const { products, featuredProducts } =
-		useProductStore();
+	const { products, featuredProducts } = useProductStore();
 
-	
 	return (
-		<div className="flex flex-col gap-8">
+		<div className="flex flex-col gap-8 overflow-auto">
 			<ProductCarousel items={featuredProducts} />
 			<ProductGrid items={products} />
 		</div>

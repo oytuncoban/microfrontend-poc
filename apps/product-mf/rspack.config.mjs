@@ -157,17 +157,12 @@ export default defineConfig({
   ].filter(Boolean),
 
   optimization: {
-    // Disabling minimization: Minimization will eventually be handled by the shell
-    // Minimization is disabled so that styles are not minimized and can be shared between the shell and the remote
-    minimize: false,
-
-    // Standalone build for the remote can be enabled by setting the following
-    // minimizer: [
-    //   new rspack.SwcJsMinimizerRspackPlugin(),
-    //   new rspack.LightningCssMinimizerRspackPlugin({
-    //     minimizerOptions: { targets },
-    //   }),
-    // ],
+    minimizer: [
+      new rspack.SwcJsMinimizerRspackPlugin(),
+      new rspack.LightningCssMinimizerRspackPlugin({
+        minimizerOptions: { targets },
+      }),
+    ],
   },
   experiments: {
     css: true,
