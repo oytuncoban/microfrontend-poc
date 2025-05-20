@@ -1,5 +1,8 @@
 # Micro Frontend PoC
 
+Prod Shell: [https://oytun-mf-shell.netlify.app/home](https://oytun-mf-shell.netlify.app)
+Prod MicroApp: [https://oytun-mf-product.netlify.app/home](https://oytun-mf-product.netlify.app)
+
 ## Description
 
 This project is a Proof of Concept (PoC) for a Micro Frontend architecture using Module Federation. It demonstrates how to build and integrate multiple frontend applications into a cohesive system.
